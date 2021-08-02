@@ -1,6 +1,7 @@
 package aleks.exercise.web;
 
 import aleks.exercise.model.Task;
+import aleks.exercise.service.Impl.ItemNotFoundException;
 import aleks.exercise.service.TaskService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -29,8 +30,12 @@ public class TaskController {
         @GetMapping("/find/{id}")
         @ApiOperation(value = "Finds task by id", notes = "Provide id to find specific task in the system", response = Task.class)
         public ResponseEntity<Task> getTaskById(@ApiParam(value = "id value of that task that you want to find.", required = true) @PathVariable("id") Long id){
-            Task task = taskService.findTaskById(id);
-            return new ResponseEntity<>(task, HttpStatus.OK);
+            try {
+                Task task = taskService.findTaskById(id);
+                return new ResponseEntity<>(task, HttpStatus.OK);
+            } catch (ItemNotFoundException e){
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         }
 
         @PostMapping("/add")
