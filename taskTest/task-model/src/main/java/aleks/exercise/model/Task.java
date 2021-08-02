@@ -93,8 +93,6 @@ public class Task {
                 ", taskDone='" + taskDone + '\'' +
                 ", assignee='" + assignee.getFirstName() + ' ' + assignee.getLastName() + '\'' +
                 ", TaskGroup='" + taskGroup.getGroupName() + '\'' +
-                //", assignee='" + assignee + '\'' +
-                //", TaskGroup='" + taskGroup + '\'' +
                 '}';
     }
 }
